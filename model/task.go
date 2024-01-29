@@ -7,8 +7,5 @@ type Task struct {
 	Title       string
 	Description string
 	Done        bool
-	CreatedAt   time.Time
+	CreatedAt   *time.Time
 }
-
-
-

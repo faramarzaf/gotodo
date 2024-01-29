@@ -12,6 +12,13 @@ type AddTodoRequest struct {
 	Description string
 }
 
+type UpdateTodoRequest struct {
+	Id          int64
+	Title       string
+	Description string
+	Done        bool
+}
+
 type TodoResponse struct {
 	Id          int64
 	Title       string
@@ -66,8 +73,36 @@ func (s Service) GetById(id int64) (TodoResponse, error) {
 
 }
 
-/*
+func (s Service) GetAll() ([]TodoResponse, error) {
+	var resp []TodoResponse
+	tasks, err := db.New(s.dbCfg).GetAll()
 
-func getAll() []TodoResponse {
+	for _, task := range tasks {
+		response := TodoResponse{
+			Id:          task.Id,
+			Title:       task.Title,
+			Description: task.Description,
+			Done:        task.Done,
+			CreatedAt:   task.CreatedAt.String(),
+		}
+		resp = append(resp, response)
+	}
 
-}*/
+	return resp, err
+}
+
+// todo handle if id not found
+func (s Service) Update(req UpdateTodoRequest) error {
+	task := model.Task{
+		Id:          req.Id,
+		Title:       req.Title,
+		Description: req.Description,
+		Done:        req.Done,
+	}
+
+	return db.New(s.dbCfg).Update(task)
+}
+
+func (s Service) DeleteByID(id int64) error {
+	return db.New(s.dbCfg).DeleteByID(id)
+}
