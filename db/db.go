@@ -40,3 +40,13 @@ func New(config Config) *MysqlDB {
 	return &MysqlDB{config: config, db: db}
 
 }
+
+func GetDbConfig() Config {
+	return Config{
+		Username: "fara",
+		Password: "123",
+		Port:     3307,
+		Host:     "localhost",
+		DBName:   "todo_db",
+	}
+}
