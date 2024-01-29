@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  todo-database:
+    image: mysql:8
+    ports:
+      - "3307:3306"
+    container_name: todo-database
+    volumes:
+      - mysql:/data
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: todo_db
+      MYSQL_USER: fara
+      MYSQL_PASSWORD: 123
+      MYSQL_ROOT_HOST: '%'
+volumes:
+  mysql:
