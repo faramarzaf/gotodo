@@ -1,21 +1,21 @@
 package dto
 
 type AddTodoRequest struct {
-	Title       string
-	Description string
+	Title       string `json:"title"`
+	Description string `json:"description"`
 }
 
 type UpdateTodoRequest struct {
-	Id          int64
-	Title       string
-	Description string
-	Done        bool
+	Id          int64  `json:"id"`
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	Done        bool   `json:"done"`
 }
 
 type TodoResponse struct {
-	Id          int64
-	Title       string
-	Description string
-	Done        bool
-	CreatedAt   string
+	Id          int64  `json:"id"`
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	Done        bool   `json:"done"`
+	CreatedAt   string `json:"created_at"`
 }

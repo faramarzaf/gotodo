@@ -72,10 +72,14 @@ func (s Service) GetAll() ([]dto.TodoResponse, error) {
 	return resp, err
 }
 
-// todo handle if id not found
 func (s Service) Update(req dto.UpdateTodoRequest) error {
+	taskById, err := s.GetById(req.Id)
+	if err != nil {
+		return err
+	}
+
 	task := model.Task{
-		Id:          req.Id,
+		Id:          taskById.Id,
 		Title:       req.Title,
 		Description: req.Description,
 		Done:        req.Done,
